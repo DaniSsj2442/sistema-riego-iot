@@ -1,0 +1,981 @@
+[
+    {
+        "id": "00f4ee551d877c99",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4a1e02b235807d23",
+        "type": "MySQLdatabase",
+        "name": "Base De Datos",
+        "host": "mysql-container",
+        "port": "3306",
+        "db": "mi_base",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "e125f597a23120f3",
+        "type": "ui_tab",
+        "name": "Riego Inteligente",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "885d6f942d055652",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#00bcd4",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#00bcd4",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#111827",
+                    "edited": true
+                },
+                "page-backgroundColor": {
+                    "value": "#0f172a",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#1f2937",
+                    "edited": true
+                },
+                "group-textColor": {
+                    "value": "#e5e7eb",
+                    "edited": true
+                },
+                "group-borderColor": {
+                    "value": "#374151",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#111827",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "widget-backgroundColor": {
+                    "value": "#00bcd4",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#1f2a37",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 60,
+                "sy": 60,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "70363cdf7c1de500",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "e125f597a23120f3",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3204b3fc1ff64d8f",
+        "type": "MySQLdatabase",
+        "name": "mysql-riego",
+        "host": "mysql",
+        "port": "3306",
+        "db": "riego_iot",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "a97d4d06d3e05f63",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "ca.crt",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "3ce69b4306891862",
+        "type": "mqtt-broker",
+        "name": "daniel-VirtualBox.local",
+        "broker": "daniel-VirtualBox.local",
+        "port": "8883",
+        "tls": "a97d4d06d3e05f63",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e2273299fd10b034",
+        "type": "mqtt in",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "topic": "riego/sensores",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "3ce69b4306891862",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 100,
+        "wires": [
+            [
+                "407adaa2d7747447",
+                "a1e831206970a698",
+                "705fede81372952b",
+                "75e14c21e2621af5",
+                "7141453f3eede745"
+            ]
+        ]
+    },
+    {
+        "id": "407adaa2d7747447",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "General",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b66db916b121c19b",
+        "type": "ui_gauge",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "group": "70363cdf7c1de500",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "V. Luz",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#000000",
+            "#e8bd21",
+            "#ffea00"
+        ],
+        "seg1": "50",
+        "seg2": "75",
+        "diff": false,
+        "className": "",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8be142341cd57093",
+        "type": "ui_gauge",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "group": "70363cdf7c1de500",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "V. Humedad",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#1e00b3",
+            "#3965ea",
+            "#3acbc1"
+        ],
+        "seg1": "35",
+        "seg2": "70",
+        "diff": false,
+        "className": "",
+        "x": 570,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ee511444a180a3df",
+        "type": "ui_text",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "order": 5,
+        "width": "12",
+        "height": "1",
+        "name": "",
+        "label": "Estado Luz",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a1e831206970a698",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Toma de humedad",
+        "func": "flow.set(\"humedad_actual\", msg.payload.humedad);\n\nmsg.payload = msg.payload.humedad;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "8be142341cd57093",
+                "3957ac76ecf0a77a",
+                "0646ff9be327fea2"
+            ]
+        ]
+    },
+    {
+        "id": "705fede81372952b",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Toma de luz",
+        "func": "msg.payload = Number(msg.payload.luz);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "b66db916b121c19b",
+                "ca05d402cd32dbc3"
+            ]
+        ]
+    },
+    {
+        "id": "75e14c21e2621af5",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Estado de luz",
+        "func": "flow.set(\"estado_luz_actual\", msg.payload.estado_luz);\n\nmsg.payload = msg.payload.estado_luz;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 380,
+        "wires": [
+            [
+                "ee511444a180a3df",
+                "d63a29013470ae2b"
+            ]
+        ]
+    },
+    {
+        "id": "3957ac76ecf0a77a",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "Humedad",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "d63a29013470ae2b",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "Estado luz",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ca05d402cd32dbc3",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "Toma de luz",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7141453f3eede745",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "MySQL",
+        "func": "msg.topic = `\nINSERT INTO sensores \n(humedad, adc_humedad, luz, adc_luz, estado_luz, dispositivo)\n\nVALUES (\n${msg.payload.humedad},\n${msg.payload.adc_humedad},\n${msg.payload.luz},\n${msg.payload.adc_luz},\n'${msg.payload.estado_luz}',\n'${msg.payload.dispositivo}'\n)\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 460,
+        "wires": [
+            [
+                "39cd50b1c999aab0"
+            ]
+        ]
+    },
+    {
+        "id": "39cd50b1c999aab0",
+        "type": "mysql",
+        "z": "00f4ee551d877c99",
+        "mydb": "3204b3fc1ff64d8f",
+        "name": "localhost",
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "d69b249ccf460e84"
+            ]
+        ]
+    },
+    {
+        "id": "d69b249ccf460e84",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "Guardado de datos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "de5e570e77e7c701",
+        "type": "ui_dropdown",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "label": "Cultivo",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "70363cdf7c1de500",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Tomate",
+                "value": "Tomate",
+                "type": "str"
+            },
+            {
+                "label": "Lechuga",
+                "value": "Lechuga",
+                "type": "str"
+            },
+            {
+                "label": "Cactus",
+                "value": "Cactus",
+                "type": "str"
+            },
+            {
+                "label": "Fresa",
+                "value": "Fresa",
+                "type": "str"
+            },
+            {
+                "label": "Maiz",
+                "value": "Maiz",
+                "type": "str"
+            },
+            {
+                "label": "Albahaca",
+                "value": "Albahaca",
+                "type": "str"
+            },
+            {
+                "label": "Orquidea",
+                "value": "Orquidea",
+                "type": "str"
+            },
+            {
+                "label": "Papa",
+                "value": "Papa",
+                "type": "str"
+            },
+            {
+                "label": "Zanahoria",
+                "value": "Zanahoria",
+                "type": "str"
+            },
+            {
+                "label": "Menta",
+                "value": "Menta",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "2304df8064f0c6d2"
+            ]
+        ]
+    },
+    {
+        "id": "2304df8064f0c6d2",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "SQL cultivo",
+        "func": "msg.topic = `\nSELECT * FROM cultivos\nWHERE nombre = '${msg.payload}'\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "1dd684839c9372b3"
+            ]
+        ]
+    },
+    {
+        "id": "1dd684839c9372b3",
+        "type": "mysql",
+        "z": "00f4ee551d877c99",
+        "mydb": "3204b3fc1ff64d8f",
+        "name": "localhost",
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "56f3cda2812fe73d"
+            ]
+        ]
+    },
+    {
+        "id": "56f3cda2812fe73d",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Procesado cultivo",
+        "func": "let cultivo = msg.payload[0];\n\nmsg.cultivo = cultivo.nombre;\n\nmsg.humedad_min = cultivo.humedad_min;\n\nmsg.humedad_max = cultivo.humedad_max;\n\nmsg.riego_permitido = cultivo.riego_permitido;\n\nmsg.descripcion = cultivo.descripcion;\n\nflow.set(\"humedad_min\", cultivo.humedad_min);\n\nflow.set(\"humedad_max\", cultivo.humedad_max);\n\nflow.set(\"riego_permitido\", cultivo.riego_permitido);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 520,
+        "wires": [
+            [
+                "8e8d16effa1210d3",
+                "51f3cea4d65610cb",
+                "f6618a530cc734f4",
+                "9ef8cb9fd0c72302"
+            ]
+        ]
+    },
+    {
+        "id": "aae6dca461a63e40",
+        "type": "ui_text",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Info",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1190,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "77c883ea9bd737cf",
+        "type": "ui_text",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Horario",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1180,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "905e3f690e853d83",
+        "type": "ui_text",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "H. Min",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1170,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "918b4fdcf527cc36",
+        "type": "ui_text",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "H. max",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1180,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f6618a530cc734f4",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "H. min",
+        "func": "msg.payload = msg.humedad_min + \"%\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 460,
+        "wires": [
+            [
+                "905e3f690e853d83"
+            ]
+        ]
+    },
+    {
+        "id": "51f3cea4d65610cb",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "H. max",
+        "func": "msg.payload = msg.humedad_max + \"%\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 500,
+        "wires": [
+            [
+                "918b4fdcf527cc36"
+            ]
+        ]
+    },
+    {
+        "id": "9ef8cb9fd0c72302",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Horario",
+        "func": "msg.payload = msg.riego_permitido;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 560,
+        "wires": [
+            [
+                "77c883ea9bd737cf"
+            ]
+        ]
+    },
+    {
+        "id": "8e8d16effa1210d3",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Descripción",
+        "func": "msg.payload = msg.descripcion;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 600,
+        "wires": [
+            [
+                "aae6dca461a63e40"
+            ]
+        ]
+    },
+    {
+        "id": "24af4580484cabbd",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Estado de bomba",
+        "func": "msg.payload = flow.get(\"estado_bomba\") || \"APAGADA\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 680,
+        "wires": [
+            [
+                "c2422da40e8428e8"
+            ]
+        ]
+    },
+    {
+        "id": "3711f0a93ccf11d7",
+        "type": "inject",
+        "z": "00f4ee551d877c99",
+        "name": "Control automático",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 680,
+        "wires": [
+            [
+                "d339a22bf3f5bcc8"
+            ]
+        ]
+    },
+    {
+        "id": "d339a22bf3f5bcc8",
+        "type": "function",
+        "z": "00f4ee551d877c99",
+        "name": "Control riego",
+        "func": "let humedad = flow.get(\"humedad_actual\");\n\nlet humedad_min = flow.get(\"humedad_min\");\n\nlet estado_luz = flow.get(\"estado_luz_actual\");\n\nlet riego_permitido = flow.get(\"riego_permitido\");\n\nlet regando = flow.get(\"regando\") || false;\n\n// =======================================\n// DEBUG\n// =======================================\n\nnode.warn(\"Humedad actual: \" + humedad);\n\nnode.warn(\"Humedad minima: \" + humedad_min);\n\nnode.warn(\"Estado luz: \" + estado_luz);\n\nnode.warn(\"Riego permitido: \" + riego_permitido);\n\n// =======================================\n// VALIDAR DATOS\n// =======================================\n\nif (\n    humedad === undefined ||\n    humedad_min === undefined ||\n    estado_luz === undefined ||\n    riego_permitido === undefined\n) {\n\n    node.warn(\"FALTAN DATOS\");\n\n    return null;\n}\n\n// =======================================\n// EVITAR REPETICIÓN\n// =======================================\n\nif (regando) {\n\n    node.warn(\"YA REGANDO...\");\n\n    return null;\n}\n\n// =======================================\n// CONDICIÓN DE RIEGO\n// =======================================\n\nif (\n    humedad < humedad_min &&\n    estado_luz === riego_permitido\n) {\n\n    flow.set(\"regando\", true);\n\n    flow.set(\"estado_bomba\", \"REGANDO\");\n\n    node.warn(\"RIEGO ACTIVADO\");\n\n    // ===================================\n    // ENCENDER BOMBA\n    // ===================================\n\n    msg.payload = \"ON\";\n\n    // ===================================\n    // APAGAR A LOS 3 SEGUNDOS\n    // ===================================\n\n    setTimeout(() => {\n\n        flow.set(\"estado_bomba\", \"APAGADA\");\n\n        node.warn(\"RIEGO DETENIDO\");\n\n        node.send({ payload: \"OFF\" });\n\n    }, 1000);\n\n    // ===================================\n    // REHABILITAR A LOS 30 SEGUNDOS\n    // ===================================\n\n    setTimeout(() => {\n\n        flow.set(\"regando\", false);\n\n        node.warn(\"LISTO PARA REEVALUAR\");\n\n    }, 30000);\n\n    return msg;\n}\n\n// =======================================\n// NO CUMPLE CONDICIONES\n// =======================================\n\nflow.set(\"estado_bomba\", \"EN ESPERA\");\n\nmsg.payload = \"OFF\";\n\nnode.warn(\"NO SE REQUIERE RIEGO\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "24af4580484cabbd",
+                "c2e028841194b222",
+                "45206b2ca473e08b"
+            ]
+        ]
+    },
+    {
+        "id": "c2e028841194b222",
+        "type": "debug",
+        "z": "00f4ee551d877c99",
+        "name": "Estado riego",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "45206b2ca473e08b",
+        "type": "mqtt out",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "topic": "riego/control",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3ce69b4306891862",
+        "x": 850,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "c2422da40e8428e8",
+        "type": "ui_template",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "name": "Estado de riego",
+        "order": 3,
+        "width": "12",
+        "height": "2",
+        "format": "<div style=\"text-align:center; padding:15px;\">\n\n    <div style=\"\n            font-size:30px;\n            font-weight:bold;\n            padding:12px;\n            border-radius:15px;\n\n            color:\n            {{msg.payload === 'REGANDO' ? '#00E676' : '#FFB300'}};\n\n            background:\n            {{msg.payload === 'REGANDO'\n            ? 'rgba(0,230,118,0.15)'\n            : 'rgba(255,179,0,0.15)'}};\n\n            box-shadow:\n            {{msg.payload === 'REGANDO'\n            ? '0 0 20px rgba(0,230,118,0.7)'\n            : '0 0 20px rgba(255,179,0,0.7)'}};\n\n            animation: pulse 1.5s infinite;\n        \">\n\n        {{msg.payload === \"REGANDO\"\n        ? \"🟢 REGANDO\"\n        : \"🟡 EN ESPERA\"}}\n\n    </div>\n\n</div>\n\n<style>\n    @keyframes pulse {\n\n        0% {\n\n            transform: scale(1);\n\n        }\n\n        50% {\n\n            transform: scale(1.03);\n\n        }\n\n        100% {\n\n            transform: scale(1);\n\n        }\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1100,
+        "y": 680,
+        "wires": [
+            [
+                "9d7452a5bbc6f151"
+            ]
+        ]
+    },
+    {
+        "id": "9d7452a5bbc6f151",
+        "type": "ui_template",
+        "z": "00f4ee551d877c99",
+        "group": "70363cdf7c1de500",
+        "name": "Icono riego",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<div style=\"text-align:center;\">\n\n    <div style=\"\n        font-size:28px;\n\n        color:#38BDF8;\n\n        text-shadow:0 0 15px rgba(56,189,248,0.8);\n\n        animation:\n        {{msg.payload === 'REGANDO'\n        ? 'pulse 1s infinite'\n        : 'none'}};\n\n    \">\n\n        💧\n\n    </div>\n\n</div>\n\n<style>\n\n@keyframes pulse {\n\n    0% {\n        transform: scale(1);\n        opacity: 0.7;\n    }\n\n    50% {\n        transform: scale(1.2);\n        opacity: 1;\n    }\n\n    100% {\n        transform: scale(1);\n        opacity: 0.7;\n    }\n\n}\n\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1290,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0646ff9be327fea2",
+        "type": "ui_chart",
+        "z": "00f4ee551d877c99",
+        "name": "",
+        "group": "70363cdf7c1de500",
+        "order": 10,
+        "width": "12",
+        "height": "5",
+        "label": "Historico humedad",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "bezier",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#3877f8",
+            "#aebde8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 590,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88ad5df3cc5cdde1",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mysql": "3.0.0",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
