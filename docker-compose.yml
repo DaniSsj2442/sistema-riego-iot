@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mi_base
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    restart: always
+
+  broker:
+    image: eclipse-mosquitto
+    container_name: broker
+    ports:
+      - "1883:1883"
+      - "8883:8883"
+    volumes:
+      - ./broker/config:/mosquitto/config
+      - ./broker/data:/mosquitto/data
+      - ./broker/log:/mosquitto/log
+    restart: always
+
+  nodered:
+    image: nodered/node-red
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./nodered:/data
+    restart: always
